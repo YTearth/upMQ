@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uphn.upMQ.dao.MqMessageMapper">
+  <resultMap id="BaseResultMap" type="com.uphn.upMQ.pojo.MqMessage">
+    <id column="MSG_ID" jdbcType="VARCHAR" property="msgId" />
+    <result column="MSG_REC_TIME" jdbcType="VARCHAR" property="msgRecTime" />
+    <result column="MSG_CONTENT" jdbcType="VARCHAR" property="msgContent" />
+    <result column="MSG_SEND_TIME" jdbcType="VARCHAR" property="msgSendTime" />
+    <result column="MSG_SEND_STATUS" jdbcType="VARCHAR" property="msgSendStatus" />
+    <result column="MSG_SEND_DESC" jdbcType="VARCHAR" property="msgSendDesc" />
+    <result column="MSG_SEND_NUM" jdbcType="DECIMAL" property="msgSendNum" />
+    <result column="MSG_PUSH_URL" jdbcType="VARCHAR" property="msgPushUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MSG_ID, MSG_REC_TIME, MSG_CONTENT, MSG_SEND_TIME, MSG_SEND_STATUS, MSG_SEND_DESC, 
+    MSG_SEND_NUM, MSG_PUSH_URL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from MQ_MESSAGE
+    where MSG_ID = #{msgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from MQ_MESSAGE
+    where MSG_ID = #{msgId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.uphn.upMQ.pojo.MqMessage">
+    insert into MQ_MESSAGE (MSG_ID, MSG_REC_TIME, MSG_CONTENT, 
+      MSG_SEND_TIME, MSG_SEND_STATUS, MSG_SEND_DESC, 
+      MSG_SEND_NUM, MSG_PUSH_URL)
+    values (#{msgId,jdbcType=VARCHAR}, #{msgRecTime,jdbcType=VARCHAR}, #{msgContent,jdbcType=VARCHAR}, 
+      #{msgSendTime,jdbcType=VARCHAR}, #{msgSendStatus,jdbcType=VARCHAR}, #{msgSendDesc,jdbcType=VARCHAR}, 
+      #{msgSendNum,jdbcType=DECIMAL}, #{msgPushUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uphn.upMQ.pojo.MqMessage">
+    insert into MQ_MESSAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="msgId != null">
+        MSG_ID,
+      </if>
+      <if test="msgRecTime != null">
+        MSG_REC_TIME,
+      </if>
+      <if test="msgContent != null">
+        MSG_CONTENT,
+      </if>
+      <if test="msgSendTime != null">
+        MSG_SEND_TIME,
+      </if>
+      <if test="msgSendStatus != null">
+        MSG_SEND_STATUS,
+      </if>
+      <if test="msgSendDesc != null">
+        MSG_SEND_DESC,
+      </if>
+      <if test="msgSendNum != null">
+        MSG_SEND_NUM,
+      </if>
+      <if test="msgPushUrl != null">
+        MSG_PUSH_URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="msgId != null">
+        #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="msgRecTime != null">
+        #{msgRecTime,jdbcType=VARCHAR},
+      </if>
+      <if test="msgContent != null">
+        #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSendTime != null">
+        #{msgSendTime,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSendStatus != null">
+        #{msgSendStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSendDesc != null">
+        #{msgSendDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSendNum != null">
+        #{msgSendNum,jdbcType=DECIMAL},
+      </if>
+      <if test="msgPushUrl != null">
+        #{msgPushUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uphn.upMQ.pojo.MqMessage">
+    update MQ_MESSAGE
+    <set>
+      <if test="msgRecTime != null">
+        MSG_REC_TIME = #{msgRecTime,jdbcType=VARCHAR},
+      </if>
+      <if test="msgContent != null">
+        MSG_CONTENT = #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSendTime != null">
+        MSG_SEND_TIME = #{msgSendTime,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSendStatus != null">
+        MSG_SEND_STATUS = #{msgSendStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSendDesc != null">
+        MSG_SEND_DESC = #{msgSendDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSendNum != null">
+        MSG_SEND_NUM = #{msgSendNum,jdbcType=DECIMAL},
+      </if>
+      <if test="msgPushUrl != null">
+        MSG_PUSH_URL = #{msgPushUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MSG_ID = #{msgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uphn.upMQ.pojo.MqMessage">
+    update MQ_MESSAGE
+    set MSG_REC_TIME = #{msgRecTime,jdbcType=VARCHAR},
+      MSG_CONTENT = #{msgContent,jdbcType=VARCHAR},
+      MSG_SEND_TIME = #{msgSendTime,jdbcType=VARCHAR},
+      MSG_SEND_STATUS = #{msgSendStatus,jdbcType=VARCHAR},
+      MSG_SEND_DESC = #{msgSendDesc,jdbcType=VARCHAR},
+      MSG_SEND_NUM = #{msgSendNum,jdbcType=DECIMAL},
+      MSG_PUSH_URL = #{msgPushUrl,jdbcType=VARCHAR}
+    where MSG_ID = #{msgId,jdbcType=VARCHAR}
+  </update>
+</mapper>
