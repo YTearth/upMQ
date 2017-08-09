@@ -40,7 +40,10 @@ public class NamedQueueChooser {
 		//TODO 当前采用ConcurrentHashMap保证线程安全,可选仅在messageQueue ==null加同步锁,后者实际效率可能会更高,待测。
 		if (messageQueue == null && autoCreate) { 
 			messageQueue = new MessageQueue(queueName);
-			queueMap.put(queueName, messageQueue);
+			MessageQueue oldQueue = queueMap.putIfAbsent(queueName, messageQueue);
+			if (oldQueue != null) {
+				messageQueue = oldQueue;
+			}
 		}
 		return messageQueue;
 	}
